@@ -11,8 +11,10 @@ public class DatasetLoaderEditor : Editor {
 	public override void OnInspectorGUI (){
 		DrawDefaultInspector ();
 		DatasetLoader manager = (DatasetLoader) target;
-		if (GUILayout.Button("Load Dataset"))
+		if (GUILayout.Button("Load Dataset Spherical"))
 			manager.SpawnPlotFromPath();
+		if (GUILayout.Button("Load Dataset Cartesian"))
+			manager.SpawnCartPlotFromPath();
 	}
 }
 #endif
@@ -66,4 +68,24 @@ public class DatasetLoader : MonoBehaviour
         else
             Debug.LogError ("CSV file not found");
 	}
+    public void SpawnCartPlotFromPath() 
+    {
+        string fullPath = Application.persistentDataPath + "/datasets/" +  datasetPath + ".csv";
+        if ( File.Exists( fullPath ) ) {
+            string[] starData;
+            StreamReader sr = new StreamReader(fullPath);
+            while (!sr.EndOfStream){
+                starData = sr.ReadLine().Split(',');
+                float x = float.Parse(starData[1]); //1 ra
+                float y = float.Parse(starData[2]); //2 dec
+                float z = float.Parse(starData[3]); //3 parallax
+                var sourceInstance = Instantiate(sourcePrefab);
+                sourceInstance.SetParent(transform);
+                sourceInstance.transform.localPosition = new Vector3(x,y,z);
+            };
+        }
+        else
+            Debug.LogError ("CSV file not found");
+	}
+
 }
