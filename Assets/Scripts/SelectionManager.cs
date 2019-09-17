@@ -10,12 +10,7 @@ public class SelectionManager : MonoBehaviour
     private Button[] buttons;
     private int buttonIndex = -1; //TODO set to -1 after placing object in TapToPlace
     private TapToPlace tapManager;
-
-    [SerializeField]
-    private Camera arCamera;
-
-
-
+ 
     private void Start () 
     {
         tapManager = transform.GetComponent<TapToPlace>();
@@ -48,20 +43,4 @@ public class SelectionManager : MonoBehaviour
     public void resetButtonIndex(){
         buttonIndex = -1;
     }
-
-    // private void Update() {
-
-    //     if (Input.touchCount > 0){
-    //         Touch touch = Input.GetTouch(0);
-    //         var touchPosition = touch.position;
-
-    //         if (touch.phase == TouchPhase.Began)
-    //         {
-    //             Ray ray = arCamera.ScreenPointToRay(touchPosition);
-                  
-    //         }
-    //     }
-    // }
-
-
 }
