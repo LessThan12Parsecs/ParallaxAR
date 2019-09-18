@@ -58,57 +58,6 @@ public class TapToPlace : MonoBehaviour
         // {
         //     PlaceObject();
         // }
-
-        if (Debug.isDebugBuild)
-        {
-            UpdateDebugText("Pos: " + placementPose.position + " Rot: " + placementPose.rotation);
-        }
-        
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            touchPosition = touch.position;
-
-            if (touch.phase == TouchPhase.Began)
-            {
-                Ray ray = targetCamera.ScreenPointToRay(touchPosition);
-                RaycastHit hitObject;
-                if (Debug.isDebugBuild)
-                {
-                    UpdateDebugText2("x: " + ray.origin.x + " y: " + ray.origin.y + " z: " + ray.origin.z);
-                }
-                if (Physics.Raycast(ray, out hitObject))
-                {
-                    lastSelectedObject = hitObject.transform.GetComponent<PlacementObject>();
-                    if (lastSelectedObject != null)
-                    {
-                        if (Debug.isDebugBuild)
-                        {
-                            UpdateDebugText2("Selected");
-                        }
-                        PlacementObject [] allOtherObjects = FindObjectsOfType<PlacementObject>();
-                        foreach (PlacementObject placementObject in allOtherObjects)
-                        {
-                            placementObject.Selected = placementObject == lastSelectedObject;
-                        }
-                    }
-                }      
-            }
-            if (touch.phase == TouchPhase.Ended)
-            {
-                lastSelectedObject.Selected = false;
-            }
-
-        }
-        if ( arRaycastManagerOrigin.Raycast(touchPosition,hits,UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
-        {
-            Pose hitPose = hits[0].pose;
-            if (lastSelectedObject.Selected)
-            {
-                lastSelectedObject.transform.position = hitPose.position;
-                lastSelectedObject.transform.rotation = hitPose.rotation;
-            }
-        }
     }
 
     public void PlaceObject()
