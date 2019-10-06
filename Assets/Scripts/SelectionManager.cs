@@ -19,11 +19,14 @@ public class SelectionManager : MonoBehaviour
     [SerializeField]
     private Camera targetCamera;
 
+    [SerializeField]
+    private Text descriptionText;
+
     private Vector2 touchPosition = default;
 
     private bool onTouchHold = false;
 
-    private static List<ARRaycastHit> hits= new List<ARRaycastHit>();
+    private static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
     private PlacementObject lastSelectedObject;
 
@@ -79,8 +82,6 @@ public class SelectionManager : MonoBehaviour
                     if (lastSelectedObject != null)
                     {
                         PlacementObject [] allOtherObjects = FindObjectsOfType<PlacementObject>();
-                        Material selectedMaterial = lastSelectedObject.GetComponentInChildren<Renderer>().material;
-                        selectedMaterial.SetFloat("Vector1_DC46BED8",0.07f);
                         foreach (PlacementObject placementObject in allOtherObjects)
                         {
                             placementObject.Selected = placementObject == lastSelectedObject;
