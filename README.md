@@ -9,7 +9,7 @@ There are three 'Datasets', the Pleiades cluster with real positions, M44 cluste
 
 ## Developer and Feedback
 
-Lead Developer is Emanuel Ramirez Catapano which you can contact through eramirez@quasarsr.com.
+Lead Developer is Emanuel Ramirez Catapano which you can contact through eramirezcatapano@gmail.com
 
 Feedback is welcomed. 
 
